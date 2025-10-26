@@ -4,6 +4,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
+import { ThemeCustomizer } from '@/components/ThemeCustomizer';
 import Index from './pages/Index';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/auth/Login';
@@ -40,6 +41,7 @@ const App = () => (
           <Route path="/500" element={<Error500 />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <ThemeCustomizer />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

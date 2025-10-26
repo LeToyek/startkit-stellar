@@ -1,23 +1,52 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Zap, Shield, Rocket } from 'lucide-react';
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { ArrowRight, Zap, Shield, Rocket, Palette, Code, Gauge } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
+import { cn } from '@/lib/utils';
 
 const features = [
   {
-    icon: Zap,
     title: 'Lightning Fast',
-    description: 'Built with Vite for instant hot module replacement and blazing fast builds.',
+    description: 'Built with React + Vite for instant HMR and optimal performance.',
+    icon: Zap,
+    color: 'text-yellow-600',
+    bgColor: 'bg-yellow-600/10',
   },
   {
+    title: 'Production Ready',
+    description: 'Complete auth system, RBAC, and PWA support out of the box.',
     icon: Shield,
-    title: 'Secure by Default',
-    description: 'Production-ready security features including RBAC and auth guards.',
+    color: 'text-green-600',
+    bgColor: 'bg-green-600/10',
   },
   {
+    title: 'Highly Scalable',
+    description: 'Modular architecture designed to grow with your application.',
     icon: Rocket,
-    title: 'Ready to Scale',
-    description: 'Modular architecture that grows with your business needs.',
+    color: 'text-blue-600',
+    bgColor: 'bg-blue-600/10',
+  },
+  {
+    title: 'Theme Customization',
+    description: 'Dynamic theming system with real-time color palette generation.',
+    icon: Palette,
+    color: 'text-purple-600',
+    bgColor: 'bg-purple-600/10',
+  },
+  {
+    title: 'Type Safe',
+    description: 'Fully typed with TypeScript for better DX and fewer bugs.',
+    icon: Code,
+    color: 'text-pink-600',
+    bgColor: 'bg-pink-600/10',
+  },
+  {
+    title: 'Optimized Performance',
+    description: 'Code splitting, lazy loading, and Core Web Vitals optimization.',
+    icon: Gauge,
+    color: 'text-orange-600',
+    bgColor: 'bg-orange-600/10',
   },
 ];
 
@@ -72,20 +101,25 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="glass rounded-xl p-8 hover:shadow-xl transition-all duration-300 animate-fade-in-up"
-                style={{ animationDelay: `${index * 150}ms` }}
-              >
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                  <feature.icon className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
-              </div>
-            ))}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <Card
+                  key={index}
+                  className="animate-fade-in hover:shadow-lg transition-all group hover:-translate-y-1"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <CardHeader>
+                    <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center mb-4", feature.bgColor)}>
+                      <Icon className={cn("h-6 w-6", feature.color)} />
+                    </div>
+                    <CardTitle className="group-hover:text-primary transition-colors">{feature.title}</CardTitle>
+                    <CardDescription>{feature.description}</CardDescription>
+                  </CardHeader>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
